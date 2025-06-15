@@ -2,7 +2,7 @@
 
 def run_chatbot():
     print("------------------------------------------------")
-    print("Hello! Welcome to Ama's Amazing African Fabrics.")
+    print("Hello! Welcome to Amaze Africa Fabrics.")
     print("I can answer common questions. Type 'bye' to exit.")
     print("------------------------------------------------")
 
