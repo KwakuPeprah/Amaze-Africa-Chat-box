@@ -37,6 +37,7 @@ def run_chatbot():
 
     # --- NEW FUNCTION FOR GETTING RESPONSE ---
     def get_bot_response(user_question_processed, faqs):
+        
         # Iterate through each FAQ entry in our data
         for faq_entry in faqs:
             # Check each keyword associated with the current FAQ entry
