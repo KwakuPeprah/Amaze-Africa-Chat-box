@@ -1,5 +1,7 @@
 # chatbot.py (Updated Version - Step 4)
 
+from fuzzywuzzy import fuzz
+
 def run_chatbot():
     print("------------------------------------------------")
     print("Hello! Welcome to Amaze Africa Fabrics.")
@@ -37,17 +39,27 @@ def run_chatbot():
 
     # --- NEW FUNCTION FOR GETTING RESPONSE ---
     def get_bot_response(user_question_processed, faqs):
+
+        best_match_score = 0
+        best_answer = None
+
+        MATCH_THRESHOLD = 80  # Set a threshold for fuzzy matching
         
         # Iterate through each FAQ entry in our data
         for faq_entry in faqs:
+
             # Check each keyword associated with the current FAQ entry
             for keyword in faq_entry["keywords"]:
-                if keyword in user_question_processed:
-                    return faq_entry["answer"] # Return the answer if a keyword matches
+                score = fuzz.partial_ratio(keyword, user_question_processed)
 
-        # If no keyword matched from any FAQ
-        return "I'm sorry, I don't understand your question. Could you please rephrase or ask about common topics like hours, designs, fabric types, location, or contact?"
-    # --- END NEW FUNCTION ---
+                if score > best_match_score:
+                    best_match_score = score
+                    best_answer = faq_entry["answer"]
+        if best_match_score >= MATCH_THRESHOLD:
+            return best_answer
+        else:
+            # If no keyword matched well enough, return a default response
+            return "I'm sorry, I don't understand your question. Could you please rephrase or ask about common topics like hours, designs, fabric types, location, or contact?"
 
 
     while True:
