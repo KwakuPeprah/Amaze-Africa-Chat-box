@@ -1,6 +1,7 @@
-# chatbot.py (Updated Version - Step 4)
+# chatbot.py
 
 from fuzzywuzzy import fuzz
+import string # Importing string for punctuation removal, which is now in use
 
 def run_chatbot():
     print("------------------------------------------------")
@@ -43,7 +44,7 @@ def run_chatbot():
         best_match_score = 0
         best_answer = None
 
-        MATCH_THRESHOLD = 80  # Set a threshold for fuzzy matching
+        MATCH_THRESHOLD = 80  # Your set threshold for fuzzy matching
         
         # Iterate through each FAQ entry in our data
         for faq_entry in faqs:
@@ -52,9 +53,19 @@ def run_chatbot():
             for keyword in faq_entry["keywords"]:
                 score = fuzz.partial_ratio(keyword, user_question_processed)
 
+                # --- DEBUG PRINTS: CORRECTLY PLACED INSIDE THE INNER LOOP ---
+                print(f"DEBUG: Comparing keyword '{keyword}' with user input '{user_question_processed}' -> Score: {score}")
+                print(f"DEBUG: Current best_match_score before potential update: {best_match_score}")
+                # -----------------------------------------------------------
+
                 if score > best_match_score:
                     best_match_score = score
                     best_answer = faq_entry["answer"]
+        
+        # --- DEBUG PRINT: After all loops have completed ---
+        print(f"DEBUG: Final best_match_score: {best_match_score} (Threshold: {MATCH_THRESHOLD})") 
+        # --------------------------------------------------
+
         if best_match_score >= MATCH_THRESHOLD:
             return best_answer
         else:
@@ -64,10 +75,22 @@ def run_chatbot():
 
     while True:
         user_input = input("You: ")
+
+        # Process the input to lower case
         processed_input = user_input.lower()
 
+        # Remove punctuation
+        processed_input = processed_input.translate(str.maketrans('', '', string.punctuation))
+
+        # Normalize whitespace
+        processed_input = ' '.join(processed_input.split())
+
+        # --- DEBUG PRINT: To see the cleaned input ---
+        print(f"DEBUG: Processed Input: '{processed_input}'")
+        # ---------------------------------------------
+
         if processed_input == 'bye':
-            print("Bot: Thank you for visiting Ama's Amazing African Fabrics. Goodbye!")
+            print("Bot: Thank you for visiting Amaze Africa Fabrics. Goodbye!")
             break
 
         # Call our new function to get the bot's response
