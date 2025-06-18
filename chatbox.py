@@ -1,7 +1,20 @@
 # chatbot.py
 
-from fuzzywuzzy import fuzz
+from fuzzywuzzy import fuzz # Importing fuzzywuzzy for fuzzy string matching
 import string # Importing string for punctuation removal, which is now in use
+import datetime
+
+# --- NEW FUNCTION: Log Unanswered Questions ---
+def log_unanswered_question(question):
+    log_file_name = "unanswered_questions.log"
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(log_file_name, "a", encoding="utf-8") as log_file:
+        log_file.write(f"[{timestamp}] {question}\n")
+    print(f"DEBUG: Logged unanswered question: '{question}' to {log_file_name}") # For immediate feedback
+# -----------------------------------------------
+
+# Make sure to import datetime at the top of your file as well!
+import datetime # <-- Add this line near your other imports (fuzz, string)
 
 def run_chatbot():
     print("------------------------------------------------")
@@ -70,6 +83,7 @@ def run_chatbot():
             return best_answer
         else:
             # If no keyword matched well enough, return a default response
+            log_unanswered_question(user_question_processed)  # Log the unanswered question
             return "I'm sorry, I don't understand your question. Could you please rephrase or ask about common topics like hours, designs, fabric types, location, or contact?"
 
 
