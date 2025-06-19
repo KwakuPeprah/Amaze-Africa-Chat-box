@@ -1,0 +1,31 @@
+   
+    [
+        {
+            "keywords": ["hours", "open hours", "what time", "close"],
+            "answer": "Ama's Amazing African Fabrics is open from 9 AM to 7 PM, Monday through Saturday."
+        },
+        {
+            "keywords": ["custom designs", "design service", "unique designs"],
+            "answer": "Yes, we offer custom fabric designs. Please visit our store or call us to discuss your unique needs."
+        },
+        {
+            "keywords": ["types of fabric", "sell fabrics", "fabric types", "cloth"],
+            "answer": "We specialize in authentic Kente, Ankara, and Batik fabrics."
+        },
+        {
+            "keywords": ["location", "where are you", "address", "find you"],
+            "answer": "You can find us at Osu Oxford Street, Accra, opposite the Post Office."
+        },
+        {
+            "keywords": ["contact", "phone number", "email", "get in touch"],
+            "answer": "You can call us at +233 24 123 4567 or email info@amasfabrics.com."
+        },
+        {
+            "keywords": ["delivery", "shipping", "send"],
+            "answer": "No, we do not currently offer delivery services."
+        },
+        {
+            "keywords": ["products", "offerings", "items", "stuff", "sell"],
+            "answer": "We offer a wide range of authentic African fabrics, including Kente, Ankara, and Batik, as well as custom design services. What specifically are you interested in?"
+        }
+    ]
